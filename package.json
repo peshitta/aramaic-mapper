@@ -1,0 +1,78 @@
+{
+  "name": "aramaic-mapper",
+  "version": "1.0.0",
+  "description": "Generic support for mapping between Aramaic writing systems",
+  "main": "build/aramaic-mapper.js",
+  "main݂Min": "build/aramaic-mapper.min.js",
+  "module": "build/aramaic-mapper.esm.js",
+  "scripts": {
+    "pretest": "rollup -c",
+    "test": "mocha",
+    "prebuild": "npm run doc && npm test && npm run lint",
+    "build": "npm run bundle",
+    "bundle": "rollup -c --environment BUILD:production",
+    "lint": "eslint src test",
+    "doc": "jsdoc2md -t doc/readme.hbs src/*.js > README.md",
+    "coverage": "cat ./coverage/lcov.info | coveralls && rm -rf ./coverage",
+    "prepublish": "npm run build"
+  },
+  "eslintConfig": {
+    "extends": "airbnb-base",
+    "rules": {
+      "no-plusplus": 0,
+      "comma-dangle": 0,
+      "no-nested-ternary": 0,
+      "function-paren-newline": 0,
+      "import/extensions": 0,
+      "arrow-parens": 0
+    }
+  },
+  "files": [
+    "build"
+  ],
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/peshitta/aramaic-mapper.git"
+  },
+  "keywords": [
+    "Peshitta",
+    "Peshitto",
+    "Pshitta",
+    "Pshitto",
+    "Sedra",
+    "Sedra.js",
+    "Sedrajs",
+    "Aramaic",
+    "Syriac",
+    "CAL",
+    "Estrangela",
+    "Estrangelo"
+  ],
+  "author": "Greg Borota",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/peshitta/aramaic-mapper/issues"
+  },
+  "homepage": "https://github.com/peshitta/aramaic-mapper#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "babelrc-rollup": "^3.0.0",
+    "coveralls": "^2.13.1",
+    "eslint": "^4.6.1",
+    "eslint-config-airbnb-base": "^12.0.0",
+    "eslint-plugin-import": "^2.7.0",
+    "istanbul": "^0.4.5",
+    "jsdoc-to-markdown": "^3.0.0",
+    "mocha": "^3.5.0",
+    "rollup": "^0.49.3",
+    "rollup-plugin-babel": "^3.0.2",
+    "rollup-plugin-istanbul": "^1.1.0",
+    "rollup-plugin-uglify": "^2.0.1"
+  }
+}
