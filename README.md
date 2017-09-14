@@ -18,14 +18,14 @@ Then run:
 npm install aramaic-mapper --save
 ```
 
-Following packages are available:
+Following bundles are available:
 * `aramaic-mapper.js` - UMD ES5 version for use in browser, node, etc.
 * `aramaic-mapper.min.js` - minified version of `aramaic-mapper.js`
 * `aramaic-mapper.esm.js` - ES6 module version, suitable for bundling with other 
 libraries and applications
 
-Alternatively the package could be downloaded directly from:
-[https://registry.npmjs.org/aramaic-mapper/-/aramaic-mapper-1.0.0.tgz](https://registry.npmjs.org/aramaic-mapper/-/aramaic-mapper-1.0.0.tgz)
+The package could also be downloaded directly from:
+[https://registry.npmjs.org/aramaic-mapper/-/aramaic-mapper-1.0.1.tgz](https://registry.npmjs.org/aramaic-mapper/-/aramaic-mapper-1.0.1.tgz)
 
 ## More information
 
@@ -43,7 +43,7 @@ Alternatively the package could be downloaded directly from:
 
 The final goal for this work is to learn the Word of God as recorded by
 [Peshitta](https://en.wikipedia.org/wiki/Peshitta).
-You are welcomed to to improve this implementation or provide feeback. Please
+You are welcomed to to improve this implementation or provide feedback. Please
 feel free to [Fork](https://help.github.com/articles/fork-a-repo/), create a
 [Pull Request](https://help.github.com/articles/about-pull-requests/) or
 submit [Issues](https://github.com/peshitta/aramaic-mapper/issues).

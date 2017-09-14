@@ -100,11 +100,15 @@ function Mapper(fromWriting, toWriting, mapCallback) {
     }
     let c = '';
     let sb = '';
-    for (let i = 0, len = word.length, mc; i < len; i += mc.length) {
+    for (
+      let i = 0, len = word.length, mc;
+      i < len;
+      i += mc && mc.length && mc.length > 0 ? mc.length : 1
+    ) {
       mc = mapCallback
         ? mapCallback(word, i, this.fromTo)
         : this.fromTo[(c = word.charAt(i))] || c;
-      sb += mc;
+      sb += mc || '';
     }
     return sb;
   };
