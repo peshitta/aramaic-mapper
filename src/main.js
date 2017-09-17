@@ -48,7 +48,32 @@ function Writing(consonants, vowels, diacritics, punctuation, other) {
   * @param { Function|undefined } mapCallback optional map callback
   */
 function Mapper(fromWriting, toWriting, mapCallback) {
+  /**
+   * Character mapping hash from base Writing to mapped Writing
+   * @instance
+   * @type { Object.<string, string> }
+   * @memberof Mapper
+   */
   this.fromTo = Object.create(null);
+
+  /**
+   * Source writing system to be mapped
+   * @instance
+   * @public
+   * @type { Writing }
+   * @memberof Mapper
+   */
+  this.fromWriting = fromWriting;
+
+  /**
+   * Destination writing system to map to
+   * @instance
+   * @public
+   * @type { Writing }
+   * @memberof Mapper
+   */
+  this.toWriting = toWriting;
+
   for (let i = 0, clen = fromWriting.consonants.length; i < clen; i++) {
     const fc = fromWriting.consonants[i];
     const tc = toWriting.consonants[i];
@@ -83,6 +108,17 @@ function Mapper(fromWriting, toWriting, mapCallback) {
     }
   }
 
+  /**
+   * Callback to replace generic one-to-one mapping
+   * @instance
+   * @public
+   * @param { string } word input word to be mapped
+   * @param { number }  index - index of the current character to be mapped
+   * @param { Object.<string, string> } fromTo - character mapping hash from
+   * base Writing to mapped Writing
+   * @returns the mapCallback function
+   * @memberof Mapper
+   */
   this.mapCallback =
     typeof mapCallback === 'function' ? mapCallback : undefined;
 
