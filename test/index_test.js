@@ -365,3 +365,79 @@ describe('Sedra', () => {
     ok(!toCalMap[''], "'' toCalMap");
   });
 });
+
+describe('Sedra', () => {
+  const mapCallback = () => '';
+
+  const mapper = new Mapper(fromSedraWriting, toCalWriting, mapCallback);
+  const toCal = mapper.map;
+
+  describe('To CAL with invalid callBack returning empty', () => {
+    it('General case usage', () => {
+      const word = toCal('LADNH');
+      const vocalised = toCal("LMeT,B'aE");
+      const wordExpected = '';
+      const vocalisedExpected = '';
+      strictEqual(word, wordExpected, 'toCal_generic consonant');
+      strictEqual(vocalised, vocalisedExpected, 'toCal_generic vocalised');
+    });
+  });
+});
+
+describe('Sedra', () => {
+  const mapCallback = () => 1;
+
+  const mapper = new Mapper(fromSedraWriting, toCalWriting, mapCallback);
+  const toCal = mapper.map;
+
+  describe('To CAL with invalid callBack returning non-string', () => {
+    it('General case usage', () => {
+      const word = toCal('LADNH');
+      const vocalised = toCal("LMeT,B'aE");
+      const wordExpected = '11111';
+      const vocalisedExpected = '111111111';
+      strictEqual(word, wordExpected, 'toCal_generic consonant');
+      strictEqual(vocalised, vocalisedExpected, 'toCal_generic vocalised');
+    });
+  });
+});
+
+describe('Sedra', () => {
+  const mapCallback = () =>
+    Object.create(null, {
+      length: { value: -1 },
+      toString: { value: () => '' }
+    });
+
+  const mapper = new Mapper(fromSedraWriting, toCalWriting, mapCallback);
+  const toCal = mapper.map;
+
+  describe('To CAL with invalid callBack returning negative length', () => {
+    it('General case usage', () => {
+      const word = toCal('LADNH');
+      const vocalised = toCal("LMeT,B'aE");
+      const wordExpected = '';
+      const vocalisedExpected = '';
+      strictEqual(word, wordExpected, 'toCal_generic consonant');
+      strictEqual(vocalised, vocalisedExpected, 'toCal_generic vocalised');
+    });
+  });
+});
+
+describe('Sedra', () => {
+  const mapCallback = () => {};
+
+  const mapper = new Mapper(fromSedraWriting, toCalWriting, mapCallback);
+  const toCal = mapper.map;
+
+  describe('To CAL with invalid callBack returning nothing', () => {
+    it('General case usage', () => {
+      const word = toCal('LADNH');
+      const vocalised = toCal("LMeT,B'aE");
+      const wordExpected = '';
+      const vocalisedExpected = '';
+      strictEqual(word, wordExpected, 'toCal_generic consonant');
+      strictEqual(vocalised, vocalisedExpected, 'toCal_generic vocalised');
+    });
+  });
+});
