@@ -1,5 +1,5 @@
-import { strictEqual, notStrictEqual, ok } from 'assert';
-import { Writing, Mapper } from '../build/aramaic-mapper';
+const { strictEqual, notStrictEqual, ok } = require('assert');
+const { Writing, Mapper } = require('../build/aramaic-mapper');
 
 const fromSedraWriting = new Writing(
   [
@@ -438,6 +438,25 @@ describe('Sedra', () => {
       const vocalisedExpected = '';
       strictEqual(word, wordExpected, 'toCal_generic consonant');
       strictEqual(vocalised, vocalisedExpected, 'toCal_generic vocalised');
+    });
+  });
+});
+
+describe('Sedra', () => {
+  const mapCallback = (word, i) => word[i];
+  const peculiarWord = {
+    length: -1,
+    toString: () => ''
+  };
+
+  const mapper = new Mapper(fromSedraWriting, toCalWriting, mapCallback);
+  const toCal = mapper.map;
+
+  describe('To CAL with peculiar negative length word', () => {
+    it('General case usage', () => {
+      const word = toCal(peculiarWord);
+      const wordExpected = '';
+      strictEqual(word, wordExpected, 'toCal_generic peculiar word object');
     });
   });
 });
