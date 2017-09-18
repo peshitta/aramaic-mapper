@@ -108,6 +108,8 @@ function Mapper(fromWriting, toWriting, mapCallback) {
     }
   }
 
+  Object.freeze(this.fromTo);
+
   /**
    * Callback to replace generic one-to-one mapping
    * @instance
