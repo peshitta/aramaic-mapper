@@ -25,7 +25,7 @@ Following bundles are available:
 libraries and applications
 
 The package could also be downloaded directly from:
-[https://registry.npmjs.org/aramaic-mapper/-/aramaic-mapper-1.0.2.tgz](https://registry.npmjs.org/aramaic-mapper/-/aramaic-mapper-1.0.2.tgz)
+[https://registry.npmjs.org/aramaic-mapper/-/aramaic-mapper-1.0.3.tgz](https://registry.npmjs.org/aramaic-mapper/-/aramaic-mapper-1.0.3.tgz)
 
 ## More information
 
@@ -65,6 +65,12 @@ npm run build
         * [new Writing(consonants, vowels, diacritics, punctuation, other)](#new_module_aramaic.Writing_new)
     * [.Mapper](#module_aramaic.Mapper)
         * [new Mapper(fromWriting, toWriting, mapCallback)](#new_module_aramaic.Mapper_new)
+        * [.fromWriting](#module_aramaic.Mapper+fromWriting) : <code>Writing</code>
+        * [.toWriting](#module_aramaic.Mapper+toWriting) : <code>Writing</code>
+        * [.fromTo](#module_aramaic.Mapper+fromTo) : <code>Object.&lt;string, string&gt;</code>
+        * [.removeDotting(word)](#module_aramaic.Mapper+removeDotting) ⇒ <code>string</code>
+        * [.map(word)](#module_aramaic.Mapper+map) ⇒ <code>string</code>
+    * [.mapCallback](#module_aramaic.mapCallback) ⇒ <code>string</code>
 
 <a name="module_aramaic.Writing"></a>
 
@@ -109,6 +115,15 @@ between writing systems is not enough, and custom mapping needs to be
 implemented instead.
 
 **Kind**: static class of [<code>aramaic</code>](#module_aramaic)  
+
+* [.Mapper](#module_aramaic.Mapper)
+    * [new Mapper(fromWriting, toWriting, mapCallback)](#new_module_aramaic.Mapper_new)
+    * [.fromWriting](#module_aramaic.Mapper+fromWriting) : <code>Writing</code>
+    * [.toWriting](#module_aramaic.Mapper+toWriting) : <code>Writing</code>
+    * [.fromTo](#module_aramaic.Mapper+fromTo) : <code>Object.&lt;string, string&gt;</code>
+    * [.removeDotting(word)](#module_aramaic.Mapper+removeDotting) ⇒ <code>string</code>
+    * [.map(word)](#module_aramaic.Mapper+map) ⇒ <code>string</code>
+
 <a name="new_module_aramaic.Mapper_new"></a>
 
 #### new Mapper(fromWriting, toWriting, mapCallback)
@@ -117,5 +132,60 @@ implemented instead.
 | --- | --- | --- |
 | fromWriting | <code>Writing</code> | base writing system |
 | toWriting | <code>Writing</code> | writing system to map to |
-| mapCallback | <code>function</code> \| <code>undefined</code> | optional map callback |
+| mapCallback | <code>mapCallback</code> \| <code>undefined</code> | optional map callback |
+
+<a name="module_aramaic.Mapper+fromWriting"></a>
+
+#### mapper.fromWriting : <code>Writing</code>
+Source writing system to be mapped
+
+**Kind**: instance property of [<code>Mapper</code>](#module_aramaic.Mapper)  
+<a name="module_aramaic.Mapper+toWriting"></a>
+
+#### mapper.toWriting : <code>Writing</code>
+Destination writing system to map to
+
+**Kind**: instance property of [<code>Mapper</code>](#module_aramaic.Mapper)  
+<a name="module_aramaic.Mapper+fromTo"></a>
+
+#### mapper.fromTo : <code>Object.&lt;string, string&gt;</code>
+Character mapping hash from base Writing to mapped Writing
+
+**Kind**: instance property of [<code>Mapper</code>](#module_aramaic.Mapper)  
+<a name="module_aramaic.Mapper+removeDotting"></a>
+
+#### mapper.removeDotting(word) ⇒ <code>string</code>
+Remove dotting (vowels and diacritics), leaving consonantal word only.
+
+**Kind**: instance method of [<code>Mapper</code>](#module_aramaic.Mapper)  
+**Returns**: <code>string</code> - consonantal word  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| word | <code>string</code> | input word to be processed |
+
+<a name="module_aramaic.Mapper+map"></a>
+
+#### mapper.map(word) ⇒ <code>string</code>
+Map word from a base writing system to another system
+
+**Kind**: instance method of [<code>Mapper</code>](#module_aramaic.Mapper)  
+**Returns**: <code>string</code> - mapped word  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| word | <code>string</code> | input word to be mapped |
+
+<a name="module_aramaic.mapCallback"></a>
+
+### aramaic.mapCallback ⇒ <code>string</code>
+**Kind**: static typedef of [<code>aramaic</code>](#module_aramaic)  
+**Returns**: <code>string</code> - the mapped string for c - could be longer than one
+character  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| word | <code>string</code> | input word to be mapped |
+| index | <code>number</code> | index of the current character to be mapped |
+| fromTo | <code>Object.&lt;string, string&gt;</code> | character mapping hash from base Writing to mapped Writing |
 

@@ -14,7 +14,6 @@
  * The main idea is that each mapped character should be in the same
  * position in the _to_ Writing system as the _from_ Writing system.
  * @static
- *
  * @constructor
  * @param { string[] } consonants consonant list in the standard aramaic order
  * @param { string[] } vowels vowel list in the Sedra order
@@ -31,6 +30,18 @@ function Writing(consonants, vowels, diacritics, punctuation, other) {
 }
 
 /**
+ * @static
+ * @callback mapCallback
+ * Callback to replace generic one-to-one mapping
+ * @param { string } word input word to be mapped
+ * @param { number }  index - index of the current character to be mapped
+ * @param { Object.<string, string> } fromTo - character mapping hash from
+ * base Writing to mapped Writing
+ * @returns { string } the mapped string for c - could be longer than one
+ * character
+ */
+
+/**
   * @class Mapper
   * @classdesc Map from a base writing system to another system.
   * The optional `mapCallback` when called will be provided following arguments:
@@ -45,34 +56,51 @@ function Writing(consonants, vowels, diacritics, punctuation, other) {
   * @constructor
   * @param { Writing } fromWriting base writing system
   * @param { Writing } toWriting writing system to map to
-  * @param { Function|undefined } mapCallback optional map callback
+  * @param { mapCallback|undefined } mapCallback optional map callback
   */
 function Mapper(fromWriting, toWriting, mapCallback) {
   /**
-   * Character mapping hash from base Writing to mapped Writing
-   * @instance
-   * @type { Object.<string, string> }
-   * @memberof Mapper
-   */
-  this.fromTo = Object.create(null);
-
-  /**
    * Source writing system to be mapped
-   * @instance
-   * @public
+   * @alias module:aramaic.Mapper#fromWriting
    * @type { Writing }
-   * @memberof Mapper
    */
   this.fromWriting = fromWriting;
 
   /**
    * Destination writing system to map to
-   * @instance
-   * @public
+   * @alias module:aramaic.Mapper#toWriting
    * @type { Writing }
-   * @memberof Mapper
    */
   this.toWriting = toWriting;
+
+  /**
+   * Character mapping hash from base Writing to mapped Writing
+   * @alias module:aramaic.Mapper#fromTo
+   * @type { Object.<string, string> }
+   */
+  this.fromTo = Object.create(null);
+
+  /**
+   * Checked callback - to make sure it is a function
+   * @private
+   * @type { mapCallback }
+   */
+  const callback = typeof mapCallback === 'function' ? mapCallback : undefined;
+
+  /**
+   * Vowels and diacritics: used for consonantal only mapping
+   * @private
+   * @type { Array.<string> }
+   */
+  const dotting = [];
+
+  /**
+   * Returns true if c is dotting character
+   * @private
+   * @param { string } c input character
+   * @returns { boolean } true if c is dotting
+   */
+  const isDotting = c => dotting.indexOf(c) > -1;
 
   for (let i = 0, clen = fromWriting.consonants.length; i < clen; i++) {
     const fc = fromWriting.consonants[i];
@@ -83,12 +111,14 @@ function Mapper(fromWriting, toWriting, mapCallback) {
   for (let j = 0, vlen = fromWriting.vowels.length; j < vlen; j++) {
     const fv = fromWriting.vowels[j];
     const tv = toWriting.vowels[j];
+    dotting.push(fv);
     Object.defineProperty(this.fromTo, fv, { value: tv, enumerable: true });
   }
 
   for (let k = 0, dlen = fromWriting.diacritics.length; k < dlen; k++) {
     const fd = fromWriting.diacritics[k];
     const td = toWriting.diacritics[k];
+    dotting.push(fd);
     Object.defineProperty(this.fromTo, fd, { value: td, enumerable: true });
   }
 
@@ -109,28 +139,37 @@ function Mapper(fromWriting, toWriting, mapCallback) {
   }
 
   Object.freeze(this.fromTo);
+  Object.freeze(dotting);
 
   /**
-   * Callback to replace generic one-to-one mapping
-   * @instance
-   * @public
-   * @param { string } word input word to be mapped
-   * @param { number }  index - index of the current character to be mapped
-   * @param { Object.<string, string> } fromTo - character mapping hash from
-   * base Writing to mapped Writing
-   * @returns the mapCallback function
-   * @memberof Mapper
+   * Remove dotting (vowels and diacritics), leaving consonantal word only.
+   * @alias module:aramaic.Mapper#removeDotting
+   * @param { string } word input word to be processed
+   * @returns { string } consonantal word
    */
-  this.mapCallback =
-    typeof mapCallback === 'function' ? mapCallback : undefined;
+  this.removeDotting = word => {
+    if (!word) {
+      return word;
+    }
+
+    let hasDotting = false;
+    const stack = [];
+    for (let i = 0, len = word.length; i < len; i++) {
+      const c = word.charAt(i);
+      if (isDotting(c)) {
+        hasDotting = true;
+      } else {
+        stack.push(c);
+      }
+    }
+    return hasDotting ? stack.join('') : word;
+  };
 
   /**
    * Map word from a base writing system to another system
-   * @instance
-   * @public
+   * @alias module:aramaic.Mapper#map
    * @param { string } word input word to be mapped
-   * @returns mapped word
-   * @memberof Mapper
+   * @returns { string } mapped word
    */
   this.map = word => {
     if (!word) {
@@ -143,8 +182,8 @@ function Mapper(fromWriting, toWriting, mapCallback) {
       i < len;
       i += mc && mc.length && mc.length > 0 ? mc.length : 1
     ) {
-      mc = mapCallback
-        ? mapCallback(word, i, this.fromTo)
+      mc = callback
+        ? callback(word, i, this.fromTo)
         : this.fromTo[(c = word.charAt(i))] || c;
       sb += mc || '';
     }
