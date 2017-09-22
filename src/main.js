@@ -87,21 +87,6 @@ function Mapper(fromWriting, toWriting, mapCallback) {
    */
   const callback = typeof mapCallback === 'function' ? mapCallback : undefined;
 
-  /**
-   * Vowels and diacritics: used for consonantal only mapping
-   * @private
-   * @type { Array.<string> }
-   */
-  const dotting = [];
-
-  /**
-   * Returns true if c is dotting character
-   * @private
-   * @param { string } c input character
-   * @returns { boolean } true if c is dotting
-   */
-  const isDotting = c => dotting.indexOf(c) > -1;
-
   for (let i = 0, clen = fromWriting.consonants.length; i < clen; i++) {
     const fc = fromWriting.consonants[i];
     const tc = toWriting.consonants[i];
@@ -111,14 +96,12 @@ function Mapper(fromWriting, toWriting, mapCallback) {
   for (let j = 0, vlen = fromWriting.vowels.length; j < vlen; j++) {
     const fv = fromWriting.vowels[j];
     const tv = toWriting.vowels[j];
-    dotting.push(fv);
     Object.defineProperty(this.fromTo, fv, { value: tv, enumerable: true });
   }
 
   for (let k = 0, dlen = fromWriting.diacritics.length; k < dlen; k++) {
     const fd = fromWriting.diacritics[k];
     const td = toWriting.diacritics[k];
-    dotting.push(fd);
     Object.defineProperty(this.fromTo, fd, { value: td, enumerable: true });
   }
 
@@ -139,31 +122,6 @@ function Mapper(fromWriting, toWriting, mapCallback) {
   }
 
   Object.freeze(this.fromTo);
-  Object.freeze(dotting);
-
-  /**
-   * Remove dotting (vowels and diacritics), leaving consonantal word only.
-   * @alias module:aramaic.Mapper#removeDotting
-   * @param { string } word input word to be processed
-   * @returns { string } consonantal word
-   */
-  this.removeDotting = word => {
-    if (!word) {
-      return word;
-    }
-
-    let hasDotting = false;
-    const stack = [];
-    for (let i = 0, len = word.length; i < len; i++) {
-      const c = word.charAt(i);
-      if (isDotting(c)) {
-        hasDotting = true;
-      } else {
-        stack.push(c);
-      }
-    }
-    return hasDotting ? stack.join('') : word;
-  };
 
   /**
    * Map word from a base writing system to another system

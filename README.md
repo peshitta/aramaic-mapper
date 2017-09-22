@@ -25,7 +25,7 @@ Following bundles are available:
 libraries and applications
 
 The package could also be downloaded directly from:
-[https://registry.npmjs.org/aramaic-mapper/-/aramaic-mapper-1.0.3.tgz](https://registry.npmjs.org/aramaic-mapper/-/aramaic-mapper-1.0.3.tgz)
+[https://registry.npmjs.org/aramaic-mapper/-/aramaic-mapper-1.0.4.tgz](https://registry.npmjs.org/aramaic-mapper/-/aramaic-mapper-1.0.4.tgz)
 
 ## More information
 
@@ -68,7 +68,6 @@ npm run build
         * [.fromWriting](#module_aramaic.Mapper+fromWriting) : <code>Writing</code>
         * [.toWriting](#module_aramaic.Mapper+toWriting) : <code>Writing</code>
         * [.fromTo](#module_aramaic.Mapper+fromTo) : <code>Object.&lt;string, string&gt;</code>
-        * [.removeDotting(word)](#module_aramaic.Mapper+removeDotting) ⇒ <code>string</code>
         * [.map(word)](#module_aramaic.Mapper+map) ⇒ <code>string</code>
     * [.mapCallback](#module_aramaic.mapCallback) ⇒ <code>string</code>
 
@@ -121,7 +120,6 @@ implemented instead.
     * [.fromWriting](#module_aramaic.Mapper+fromWriting) : <code>Writing</code>
     * [.toWriting](#module_aramaic.Mapper+toWriting) : <code>Writing</code>
     * [.fromTo](#module_aramaic.Mapper+fromTo) : <code>Object.&lt;string, string&gt;</code>
-    * [.removeDotting(word)](#module_aramaic.Mapper+removeDotting) ⇒ <code>string</code>
     * [.map(word)](#module_aramaic.Mapper+map) ⇒ <code>string</code>
 
 <a name="new_module_aramaic.Mapper_new"></a>
@@ -152,18 +150,6 @@ Destination writing system to map to
 Character mapping hash from base Writing to mapped Writing
 
 **Kind**: instance property of [<code>Mapper</code>](#module_aramaic.Mapper)  
-<a name="module_aramaic.Mapper+removeDotting"></a>
-
-#### mapper.removeDotting(word) ⇒ <code>string</code>
-Remove dotting (vowels and diacritics), leaving consonantal word only.
-
-**Kind**: instance method of [<code>Mapper</code>](#module_aramaic.Mapper)  
-**Returns**: <code>string</code> - consonantal word  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| word | <code>string</code> | input word to be processed |
-
 <a name="module_aramaic.Mapper+map"></a>
 
 #### mapper.map(word) ⇒ <code>string</code>
