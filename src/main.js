@@ -140,9 +140,15 @@ function Mapper(fromWriting, toWriting, mapCallback) {
       i < len;
       i += mc && mc.length && mc.length > 0 ? mc.length : 1
     ) {
-      mc = callback
-        ? callback(word, i, this.fromTo)
-        : this.fromTo[(c = word.charAt(i))] || c;
+      if (callback) {
+        mc = callback(word, i, this.fromTo);
+      } else {
+        c = word.charAt(i);
+        mc = this.fromTo[c];
+        if (!mc && mc !== '') {
+          mc = c;
+        }
+      }
       sb += mc || '';
     }
     return sb;
