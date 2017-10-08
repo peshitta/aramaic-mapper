@@ -25,7 +25,7 @@ Following bundles are available:
 libraries and applications
 
 The package could also be downloaded directly from:
-[https://registry.npmjs.org/aramaic-mapper/-/aramaic-mapper-1.0.5.tgz](https://registry.npmjs.org/aramaic-mapper/-/aramaic-mapper-1.0.5.tgz)
+[https://registry.npmjs.org/aramaic-mapper/-/aramaic-mapper-1.0.6.tgz](https://registry.npmjs.org/aramaic-mapper/-/aramaic-mapper-1.0.6.tgz)
 
 ## More information
 
@@ -60,20 +60,20 @@ npm run build
 
 ## API Reference
 
-* [aramaic](#module_aramaic)
-    * [.Writing](#module_aramaic.Writing)
-        * [new Writing(consonants, vowels, diacritics, punctuation, other)](#new_module_aramaic.Writing_new)
-    * [.Mapper](#module_aramaic.Mapper)
-        * [new Mapper(fromWriting, toWriting, mapCallback)](#new_module_aramaic.Mapper_new)
-        * [.fromWriting](#module_aramaic.Mapper+fromWriting) : <code>Writing</code>
-        * [.toWriting](#module_aramaic.Mapper+toWriting) : <code>Writing</code>
-        * [.fromTo](#module_aramaic.Mapper+fromTo) : <code>Object.&lt;string, string&gt;</code>
-        * [.map(word)](#module_aramaic.Mapper+map) ⇒ <code>string</code>
-    * [.mapCallback](#module_aramaic.mapCallback) ⇒ <code>string</code>
+* [aramaicMapper](#module_aramaicMapper)
+    * [.Writing](#module_aramaicMapper.Writing)
+        * [new Writing(consonants, vowels, diacritics, punctuation, other)](#new_module_aramaicMapper.Writing_new)
+    * [.Mapper](#module_aramaicMapper.Mapper)
+        * [new Mapper(fromWriting, toWriting, mapCallback)](#new_module_aramaicMapper.Mapper_new)
+        * [.fromWriting](#module_aramaicMapper.Mapper+fromWriting) : <code>Writing</code>
+        * [.toWriting](#module_aramaicMapper.Mapper+toWriting) : <code>Writing</code>
+        * [.fromTo](#module_aramaicMapper.Mapper+fromTo) : <code>Object.&lt;string, string&gt;</code>
+        * [.map(word)](#module_aramaicMapper.Mapper+map) ⇒ <code>string</code>
+    * [.mapCallback](#module_aramaicMapper.mapCallback) ⇒ <code>string</code>
 
-<a name="module_aramaic.Writing"></a>
+<a name="module_aramaicMapper.Writing"></a>
 
-### aramaic.Writing
+### aramaicMapper.Writing
 Tuple for storing an Aramaic writing system:
 * Consonants are expected to be in the standard Aramaic order.
 * Vowels are expected to be in the Sedra [ a o e i u ] order + optional
@@ -87,8 +87,8 @@ Tuple for storing an Aramaic writing system:
 The main idea is that each mapped character should be in the same
 position in the _to_ Writing system as the _from_ Writing system.
 
-**Kind**: static class of [<code>aramaic</code>](#module_aramaic)  
-<a name="new_module_aramaic.Writing_new"></a>
+**Kind**: static class of [<code>aramaicMapper</code>](#module_aramaicMapper)  
+<a name="new_module_aramaicMapper.Writing_new"></a>
 
 #### new Writing(consonants, vowels, diacritics, punctuation, other)
 
@@ -100,9 +100,9 @@ position in the _to_ Writing system as the _from_ Writing system.
 | punctuation | <code>Array.&lt;string&gt;</code> \| <code>undefined</code> | optional punctuation list |
 | other | <code>Array.&lt;string&gt;</code> \| <code>undefined</code> | optional other symbols like crosses, etc. |
 
-<a name="module_aramaic.Mapper"></a>
+<a name="module_aramaicMapper.Mapper"></a>
 
-### aramaic.Mapper
+### aramaicMapper.Mapper
 Map from a base writing system to another system.
 The optional `mapCallback` when called will be provided following arguments:
 * word - the word to be mapped
@@ -113,16 +113,16 @@ The optional `mapCallback` when called will be provided following arguments:
 between writing systems is not enough, and custom mapping needs to be
 implemented instead.
 
-**Kind**: static class of [<code>aramaic</code>](#module_aramaic)  
+**Kind**: static class of [<code>aramaicMapper</code>](#module_aramaicMapper)  
 
-* [.Mapper](#module_aramaic.Mapper)
-    * [new Mapper(fromWriting, toWriting, mapCallback)](#new_module_aramaic.Mapper_new)
-    * [.fromWriting](#module_aramaic.Mapper+fromWriting) : <code>Writing</code>
-    * [.toWriting](#module_aramaic.Mapper+toWriting) : <code>Writing</code>
-    * [.fromTo](#module_aramaic.Mapper+fromTo) : <code>Object.&lt;string, string&gt;</code>
-    * [.map(word)](#module_aramaic.Mapper+map) ⇒ <code>string</code>
+* [.Mapper](#module_aramaicMapper.Mapper)
+    * [new Mapper(fromWriting, toWriting, mapCallback)](#new_module_aramaicMapper.Mapper_new)
+    * [.fromWriting](#module_aramaicMapper.Mapper+fromWriting) : <code>Writing</code>
+    * [.toWriting](#module_aramaicMapper.Mapper+toWriting) : <code>Writing</code>
+    * [.fromTo](#module_aramaicMapper.Mapper+fromTo) : <code>Object.&lt;string, string&gt;</code>
+    * [.map(word)](#module_aramaicMapper.Mapper+map) ⇒ <code>string</code>
 
-<a name="new_module_aramaic.Mapper_new"></a>
+<a name="new_module_aramaicMapper.Mapper_new"></a>
 
 #### new Mapper(fromWriting, toWriting, mapCallback)
 
@@ -132,40 +132,40 @@ implemented instead.
 | toWriting | <code>Writing</code> | writing system to map to |
 | mapCallback | <code>mapCallback</code> \| <code>undefined</code> | optional map callback |
 
-<a name="module_aramaic.Mapper+fromWriting"></a>
+<a name="module_aramaicMapper.Mapper+fromWriting"></a>
 
 #### mapper.fromWriting : <code>Writing</code>
 Source writing system to be mapped
 
-**Kind**: instance property of [<code>Mapper</code>](#module_aramaic.Mapper)  
-<a name="module_aramaic.Mapper+toWriting"></a>
+**Kind**: instance property of [<code>Mapper</code>](#module_aramaicMapper.Mapper)  
+<a name="module_aramaicMapper.Mapper+toWriting"></a>
 
 #### mapper.toWriting : <code>Writing</code>
 Destination writing system to map to
 
-**Kind**: instance property of [<code>Mapper</code>](#module_aramaic.Mapper)  
-<a name="module_aramaic.Mapper+fromTo"></a>
+**Kind**: instance property of [<code>Mapper</code>](#module_aramaicMapper.Mapper)  
+<a name="module_aramaicMapper.Mapper+fromTo"></a>
 
 #### mapper.fromTo : <code>Object.&lt;string, string&gt;</code>
 Character mapping hash from base Writing to mapped Writing
 
-**Kind**: instance property of [<code>Mapper</code>](#module_aramaic.Mapper)  
-<a name="module_aramaic.Mapper+map"></a>
+**Kind**: instance property of [<code>Mapper</code>](#module_aramaicMapper.Mapper)  
+<a name="module_aramaicMapper.Mapper+map"></a>
 
 #### mapper.map(word) ⇒ <code>string</code>
 Map word from a base writing system to another system
 
-**Kind**: instance method of [<code>Mapper</code>](#module_aramaic.Mapper)  
+**Kind**: instance method of [<code>Mapper</code>](#module_aramaicMapper.Mapper)  
 **Returns**: <code>string</code> - mapped word  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | word | <code>string</code> | input word to be mapped |
 
-<a name="module_aramaic.mapCallback"></a>
+<a name="module_aramaicMapper.mapCallback"></a>
 
-### aramaic.mapCallback ⇒ <code>string</code>
-**Kind**: static typedef of [<code>aramaic</code>](#module_aramaic)  
+### aramaicMapper.mapCallback ⇒ <code>string</code>
+**Kind**: static typedef of [<code>aramaicMapper</code>](#module_aramaicMapper)  
 **Returns**: <code>string</code> - the mapped string for c - could be longer than one
 character  
 

@@ -1,4 +1,4 @@
-/** @module aramaic */
+/** @module aramaicMapper */
 /**
  * @class Writing
  * @classdesc Tuple for storing an Aramaic writing system:
@@ -42,40 +42,40 @@ function Writing(consonants, vowels, diacritics, punctuation, other) {
  */
 
 /**
-  * @class Mapper
-  * @classdesc Map from a base writing system to another system.
-  * The optional `mapCallback` when called will be provided following arguments:
-  * * word - the word to be mapped
-  * * index - index of the current character to be mapped
-  * * fromTo - character mapping hash from base Writing to mapped Writing
-  *
-  * `mapCallback` needs to be provided only when the simple one to one mapping
-  * between writing systems is not enough, and custom mapping needs to be
-  * implemented instead.
-  * @static
-  * @constructor
-  * @param { Writing } fromWriting base writing system
-  * @param { Writing } toWriting writing system to map to
-  * @param { mapCallback|undefined } mapCallback optional map callback
-  */
+ * @class Mapper
+ * @classdesc Map from a base writing system to another system.
+ * The optional `mapCallback` when called will be provided following arguments:
+ * * word - the word to be mapped
+ * * index - index of the current character to be mapped
+ * * fromTo - character mapping hash from base Writing to mapped Writing
+ *
+ * `mapCallback` needs to be provided only when the simple one to one mapping
+ * between writing systems is not enough, and custom mapping needs to be
+ * implemented instead.
+ * @static
+ * @constructor
+ * @param { Writing } fromWriting base writing system
+ * @param { Writing } toWriting writing system to map to
+ * @param { mapCallback|undefined } mapCallback optional map callback
+ */
 function Mapper(fromWriting, toWriting, mapCallback) {
   /**
    * Source writing system to be mapped
-   * @alias module:aramaic.Mapper#fromWriting
+   * @alias module:aramaicMapper.Mapper#fromWriting
    * @type { Writing }
    */
   this.fromWriting = fromWriting;
 
   /**
    * Destination writing system to map to
-   * @alias module:aramaic.Mapper#toWriting
+   * @alias module:aramaicMapper.Mapper#toWriting
    * @type { Writing }
    */
   this.toWriting = toWriting;
 
   /**
    * Character mapping hash from base Writing to mapped Writing
-   * @alias module:aramaic.Mapper#fromTo
+   * @alias module:aramaicMapper.Mapper#fromTo
    * @type { Object.<string, string> }
    */
   this.fromTo = Object.create(null);
@@ -125,7 +125,7 @@ function Mapper(fromWriting, toWriting, mapCallback) {
 
   /**
    * Map word from a base writing system to another system
-   * @alias module:aramaic.Mapper#map
+   * @alias module:aramaicMapper.Mapper#map
    * @param { string } word input word to be mapped
    * @returns { string } mapped word
    */
