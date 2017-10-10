@@ -5,8 +5,8 @@
  * * Consonants are expected to be in the standard Aramaic order.
  * * Vowels are expected to be in the Sedra [ a o e i u ] order + optional
  *   Eastern/Hebrew short E and long O in positions 6 and 7 respectively.
- * * Diacritics must also follow Sedra [' , _  *] order. They are Qushaya,
- *   Rukkakha, Linea Occultans and Seyame respectively.
+ * * Diacritics, if provided, should follow Sedra [' , _  *] order. They are
+ *   Qushaya, Rukkakha, Linea Occultans and Seyame respectively.
  *   Other diacritics like verb and homograph dots or Hebrew Sheva, if
  *   supported, should be added after the above.
  * * Optionally punctuation and other characters could be added for mapping.
@@ -17,7 +17,7 @@
  * @constructor
  * @param { string[] } consonants consonant list in the standard aramaic order
  * @param { string[] } vowels vowel list in the Sedra order
- * @param { string[] } diacritics diacritics list in the Sedra order
+ * @param { string[] } diacritics optional diacritics list in the Sedra order
  * @param { string[]|undefined } punctuation optional punctuation list
  * @param { string[]|undefined } other optional other symbols like crosses, etc.
   */
@@ -99,10 +99,12 @@ function Mapper(fromWriting, toWriting, mapCallback) {
     Object.defineProperty(this.fromTo, fv, { value: tv, enumerable: true });
   }
 
-  for (let k = 0, dlen = fromWriting.diacritics.length; k < dlen; k++) {
-    const fd = fromWriting.diacritics[k];
-    const td = toWriting.diacritics[k];
-    Object.defineProperty(this.fromTo, fd, { value: td, enumerable: true });
+  if (fromWriting.diacritics && toWriting.diacritics) {
+    for (let k = 0, dlen = fromWriting.diacritics.length; k < dlen; k++) {
+      const fd = fromWriting.diacritics[k];
+      const td = toWriting.diacritics[k];
+      Object.defineProperty(this.fromTo, fd, { value: td, enumerable: true });
+    }
   }
 
   if (fromWriting.punctuation && toWriting.punctuation) {

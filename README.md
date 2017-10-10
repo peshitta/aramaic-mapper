@@ -25,7 +25,7 @@ Following bundles are available:
 libraries and applications
 
 The package could also be downloaded directly from:
-[https://registry.npmjs.org/aramaic-mapper/-/aramaic-mapper-1.0.6.tgz](https://registry.npmjs.org/aramaic-mapper/-/aramaic-mapper-1.0.6.tgz)
+[https://registry.npmjs.org/aramaic-mapper/-/aramaic-mapper-1.0.7.tgz](https://registry.npmjs.org/aramaic-mapper/-/aramaic-mapper-1.0.7.tgz)
 
 ## More information
 
@@ -78,8 +78,8 @@ Tuple for storing an Aramaic writing system:
 * Consonants are expected to be in the standard Aramaic order.
 * Vowels are expected to be in the Sedra [ a o e i u ] order + optional
   Eastern/Hebrew short E and long O in positions 6 and 7 respectively.
-* Diacritics must also follow Sedra [' , _  *] order. They are Qushaya,
-  Rukkakha, Linea Occultans and Seyame respectively.
+* Diacritics, if provided, should follow Sedra [' , _  *] order. They are
+  Qushaya, Rukkakha, Linea Occultans and Seyame respectively.
   Other diacritics like verb and homograph dots or Hebrew Sheva, if
   supported, should be added after the above.
 * Optionally punctuation and other characters could be added for mapping.
@@ -96,7 +96,7 @@ position in the _to_ Writing system as the _from_ Writing system.
 | --- | --- | --- |
 | consonants | <code>Array.&lt;string&gt;</code> | consonant list in the standard aramaic order |
 | vowels | <code>Array.&lt;string&gt;</code> | vowel list in the Sedra order |
-| diacritics | <code>Array.&lt;string&gt;</code> | diacritics list in the Sedra order |
+| diacritics | <code>Array.&lt;string&gt;</code> | optional diacritics list in the Sedra order |
 | punctuation | <code>Array.&lt;string&gt;</code> \| <code>undefined</code> | optional punctuation list |
 | other | <code>Array.&lt;string&gt;</code> \| <code>undefined</code> | optional other symbols like crosses, etc. |
 
