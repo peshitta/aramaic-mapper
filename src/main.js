@@ -81,6 +81,14 @@ function Mapper(fromWriting, toWriting, mapCallback) {
   this.fromTo = Object.create(null);
 
   /**
+   * 1 character to n characters mappings array property.
+   * Used to move only 1 character ahead, instead of length of mapped string.
+   * @alias module:aramaicMapper.multiples
+   * @type { Array.<string> }
+   */
+  this.multiples = [];
+
+  /**
    * Checked callback - to make sure it is a function
    * @private
    * @type { mapCallback }
@@ -140,7 +148,10 @@ function Mapper(fromWriting, toWriting, mapCallback) {
     for (
       let i = 0, len = word.length, mc;
       i < len;
-      i += mc && mc.length && mc.length > 0 ? mc.length : 1
+      i +=
+        mc && mc.length && mc.length > 0 && this.multiples.indexOf(mc) === -1
+          ? mc.length
+          : 1
     ) {
       if (callback) {
         mc = callback(word, i, this.fromTo);

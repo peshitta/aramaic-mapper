@@ -25,7 +25,7 @@ Following bundles are available:
 libraries and applications
 
 The package could also be downloaded directly from:
-[https://registry.npmjs.org/aramaic-mapper/-/aramaic-mapper-1.0.7.tgz](https://registry.npmjs.org/aramaic-mapper/-/aramaic-mapper-1.0.7.tgz)
+[https://registry.npmjs.org/aramaic-mapper/-/aramaic-mapper-1.0.8.tgz](https://registry.npmjs.org/aramaic-mapper/-/aramaic-mapper-1.0.8.tgz)
 
 ## More information
 
@@ -69,6 +69,7 @@ npm run build
         * [.toWriting](#module_aramaicMapper.Mapper+toWriting) : <code>Writing</code>
         * [.fromTo](#module_aramaicMapper.Mapper+fromTo) : <code>Object.&lt;string, string&gt;</code>
         * [.map(word)](#module_aramaicMapper.Mapper+map) ⇒ <code>string</code>
+    * [.multiples](#module_aramaicMapper.multiples) : <code>Array.&lt;string&gt;</code>
     * [.mapCallback](#module_aramaicMapper.mapCallback) ⇒ <code>string</code>
 
 <a name="module_aramaicMapper.Writing"></a>
@@ -162,6 +163,13 @@ Map word from a base writing system to another system
 | --- | --- | --- |
 | word | <code>string</code> | input word to be mapped |
 
+<a name="module_aramaicMapper.multiples"></a>
+
+### aramaicMapper.multiples : <code>Array.&lt;string&gt;</code>
+1 character to n characters mappings array property.
+Used to move only 1 character ahead, instead of length of mapped string.
+
+**Kind**: static property of [<code>aramaicMapper</code>](#module_aramaicMapper)  
 <a name="module_aramaicMapper.mapCallback"></a>
 
 ### aramaicMapper.mapCallback ⇒ <code>string</code>
