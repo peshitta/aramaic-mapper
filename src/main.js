@@ -36,6 +36,7 @@ function Writing(consonants, vowels, diacritics, punctuation, other) {
  * @param { string } word input word to be mapped
  * @param { number }  index - index of the current character to be mapped
  * @param { Object.<string, string> } fromTo - character mapping hash from
+ * @param { Object } wordProps optional word properties hash
  * base Writing to mapped Writing
  * @returns { string } the mapped string for c - could be longer than one
  * character
@@ -83,7 +84,7 @@ function Mapper(fromWriting, toWriting, mapCallback) {
   /**
    * 1 character to n characters mappings array property.
    * Used to move only 1 character ahead, instead of length of mapped string.
-   * @alias module:aramaicMapper.multiples
+   * @alias module:aramaicMapper.Mapper#multiples
    * @type { Array.<string> }
    */
   this.multiples = [];
@@ -137,9 +138,10 @@ function Mapper(fromWriting, toWriting, mapCallback) {
    * Map word from a base writing system to another system
    * @alias module:aramaicMapper.Mapper#map
    * @param { string } word input word to be mapped
+   * @param { Object } wordProps optional word settings - to be passed to callback
    * @returns { string } mapped word
    */
-  this.map = word => {
+  this.map = (word, wordProps) => {
     if (!word) {
       return word;
     }
@@ -154,7 +156,7 @@ function Mapper(fromWriting, toWriting, mapCallback) {
           : 1
     ) {
       if (callback) {
-        mc = callback(word, i, this.fromTo);
+        mc = callback(word, i, this.fromTo, wordProps);
       } else {
         c = word.charAt(i);
         mc = this.fromTo[c];

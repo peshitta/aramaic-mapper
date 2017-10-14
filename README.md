@@ -25,7 +25,7 @@ Following bundles are available:
 libraries and applications
 
 The package could also be downloaded directly from:
-[https://registry.npmjs.org/aramaic-mapper/-/aramaic-mapper-1.0.8.tgz](https://registry.npmjs.org/aramaic-mapper/-/aramaic-mapper-1.0.8.tgz)
+[https://registry.npmjs.org/aramaic-mapper/-/aramaic-mapper-1.0.9.tgz](https://registry.npmjs.org/aramaic-mapper/-/aramaic-mapper-1.0.9.tgz)
 
 ## More information
 
@@ -68,8 +68,8 @@ npm run build
         * [.fromWriting](#module_aramaicMapper.Mapper+fromWriting) : <code>Writing</code>
         * [.toWriting](#module_aramaicMapper.Mapper+toWriting) : <code>Writing</code>
         * [.fromTo](#module_aramaicMapper.Mapper+fromTo) : <code>Object.&lt;string, string&gt;</code>
-        * [.map(word)](#module_aramaicMapper.Mapper+map) ⇒ <code>string</code>
-    * [.multiples](#module_aramaicMapper.multiples) : <code>Array.&lt;string&gt;</code>
+        * [.multiples](#module_aramaicMapper.Mapper+multiples) : <code>Array.&lt;string&gt;</code>
+        * [.map(word, wordProps)](#module_aramaicMapper.Mapper+map) ⇒ <code>string</code>
     * [.mapCallback](#module_aramaicMapper.mapCallback) ⇒ <code>string</code>
 
 <a name="module_aramaicMapper.Writing"></a>
@@ -121,7 +121,8 @@ implemented instead.
     * [.fromWriting](#module_aramaicMapper.Mapper+fromWriting) : <code>Writing</code>
     * [.toWriting](#module_aramaicMapper.Mapper+toWriting) : <code>Writing</code>
     * [.fromTo](#module_aramaicMapper.Mapper+fromTo) : <code>Object.&lt;string, string&gt;</code>
-    * [.map(word)](#module_aramaicMapper.Mapper+map) ⇒ <code>string</code>
+    * [.multiples](#module_aramaicMapper.Mapper+multiples) : <code>Array.&lt;string&gt;</code>
+    * [.map(word, wordProps)](#module_aramaicMapper.Mapper+map) ⇒ <code>string</code>
 
 <a name="new_module_aramaicMapper.Mapper_new"></a>
 
@@ -151,9 +152,16 @@ Destination writing system to map to
 Character mapping hash from base Writing to mapped Writing
 
 **Kind**: instance property of [<code>Mapper</code>](#module_aramaicMapper.Mapper)  
+<a name="module_aramaicMapper.Mapper+multiples"></a>
+
+#### mapper.multiples : <code>Array.&lt;string&gt;</code>
+1 character to n characters mappings array property.
+Used to move only 1 character ahead, instead of length of mapped string.
+
+**Kind**: instance property of [<code>Mapper</code>](#module_aramaicMapper.Mapper)  
 <a name="module_aramaicMapper.Mapper+map"></a>
 
-#### mapper.map(word) ⇒ <code>string</code>
+#### mapper.map(word, wordProps) ⇒ <code>string</code>
 Map word from a base writing system to another system
 
 **Kind**: instance method of [<code>Mapper</code>](#module_aramaicMapper.Mapper)  
@@ -162,14 +170,8 @@ Map word from a base writing system to another system
 | Param | Type | Description |
 | --- | --- | --- |
 | word | <code>string</code> | input word to be mapped |
+| wordProps | <code>Object</code> | optional word settings - to be passed to callback |
 
-<a name="module_aramaicMapper.multiples"></a>
-
-### aramaicMapper.multiples : <code>Array.&lt;string&gt;</code>
-1 character to n characters mappings array property.
-Used to move only 1 character ahead, instead of length of mapped string.
-
-**Kind**: static property of [<code>aramaicMapper</code>](#module_aramaicMapper)  
 <a name="module_aramaicMapper.mapCallback"></a>
 
 ### aramaicMapper.mapCallback ⇒ <code>string</code>
@@ -181,5 +183,6 @@ character
 | --- | --- | --- |
 | word | <code>string</code> | input word to be mapped |
 | index | <code>number</code> | index of the current character to be mapped |
-| fromTo | <code>Object.&lt;string, string&gt;</code> | character mapping hash from base Writing to mapped Writing |
+| fromTo | <code>Object.&lt;string, string&gt;</code> | character mapping hash from |
+| wordProps | <code>Object</code> | optional word properties hash base Writing to mapped Writing |
 
