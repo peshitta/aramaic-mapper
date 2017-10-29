@@ -173,11 +173,11 @@ function Mapper(fromWriting, toWriting, mapCallback) {
 /**
  * Returns a function to remove vowels and diacritics and keep the consonantal
  * skeleton only.
- * @alias module:aramaicMapper.Mapper#removeDotting
- * @param { Function } isDotting string => boolean to check if char is dotting
- * @returns { Function } word => word removeDotting function logic
+ * @static
+ * @param { Function } isDotting (string => boolean) to check if char is dotting
+ * @returns { Function } (word => word) clearDotting function logic
 */
-Mapper.prototype.removeDotting = isDotting => word => {
+export const clearDotting = isDotting => word => {
   if (!word) {
     return word;
   }

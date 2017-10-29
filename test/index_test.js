@@ -1,5 +1,5 @@
 const { strictEqual, notStrictEqual, ok } = require('assert');
-const { Writing, Mapper } = require('../build/aramaic-mapper');
+const { Writing, Mapper, clearDotting } = require('../build/aramaic-mapper');
 
 const consonants = [
   'A',
@@ -475,31 +475,47 @@ describe('Sedra', () => {
     });
   });
 });
-describe('Sedra', () => {
+
+describe('No Diacritics path', () => {
   const fromWriting = new Writing(consonants, vowels);
-  const toWriting = new Writing(calConsonants, vowels.concat(['E', 'O']));
+  const toWriting = new Writing(calConsonants, vowels);
   const mapper = new Mapper(fromWriting, toWriting);
-  const removeDotting = mapper.removeDotting(isDotting);
-  describe('removeDotting', () => {
+  it('Check Lengths', () => {
+    strictEqual(
+      mapper.fromWriting.consonants.length,
+      mapper.toWriting.consonants.length,
+      'consonant length'
+    );
+    strictEqual(
+      mapper.fromWriting.vowels.length,
+      mapper.toWriting.vowels.length,
+      'vowel length'
+    );
+  });
+});
+
+describe('Sedra', () => {
+  const removeDotting = clearDotting(isDotting);
+  describe('clearDotting', () => {
     it('Check consonantal and vocalised', () => {
       const word = 'DXSR;A-DI;L;IOS';
       const expected = removeDotting(word);
       const vocalised = removeDotting("D'XeSaRi;aA-D,I,i;Li;I'oOS");
-      strictEqual(word, expected, 'removeDotting consonant only');
-      strictEqual(vocalised, expected, 'removeDotting vocalised');
+      strictEqual(word, expected, 'clearDotting consonant only');
+      strictEqual(vocalised, expected, 'clearDotting vocalised');
     });
     it('Word with (wu) => (uO) mapping', () => {
       const word = removeDotting('LBELDBB;CON');
       const wordExpected = 'LBELDBB;CON';
       const vocalised = removeDotting("LaB,EeLD'B,oB,a;C'uON");
       const vocalisedExpected = wordExpected;
-      strictEqual(word, wordExpected, 'removeDotting_wu consonant');
-      strictEqual(vocalised, vocalisedExpected, 'removeDotting_wu vocalised');
+      strictEqual(word, wordExpected, 'clearDotting_wu consonant');
+      strictEqual(vocalised, vocalisedExpected, 'clearDotting_wu vocalised');
     });
     it('Blank word returns blank', () => {
       const word = removeDotting('');
       const wordExpected = '';
-      strictEqual(word, wordExpected, 'removeDotting_blank');
+      strictEqual(word, wordExpected, 'clearDotting_blank');
     });
   });
 });
