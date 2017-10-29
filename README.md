@@ -25,7 +25,7 @@ Following bundles are available:
 libraries and applications
 
 The package could also be downloaded directly from:
-[https://registry.npmjs.org/aramaic-mapper/-/aramaic-mapper-1.1.0.tgz](https://registry.npmjs.org/aramaic-mapper/-/aramaic-mapper-1.1.0.tgz)
+[https://registry.npmjs.org/aramaic-mapper/-/aramaic-mapper-1.1.1.tgz](https://registry.npmjs.org/aramaic-mapper/-/aramaic-mapper-1.1.1.tgz)
 
 ## More information
 
@@ -70,6 +70,7 @@ npm run build
         * [.fromTo](#module_aramaicMapper.Mapper+fromTo) : <code>Object.&lt;string, string&gt;</code>
         * [.multiples](#module_aramaicMapper.Mapper+multiples) : <code>Array.&lt;string&gt;</code>
         * [.map(word, wordProps)](#module_aramaicMapper.Mapper+map) ⇒ <code>string</code>
+        * [.removeDotting(isDotting)](#module_aramaicMapper.Mapper+removeDotting) ⇒ <code>function</code>
     * [.mapCallback](#module_aramaicMapper.mapCallback) ⇒ <code>string</code>
 
 <a name="module_aramaicMapper.Writing"></a>
@@ -123,6 +124,7 @@ implemented instead.
     * [.fromTo](#module_aramaicMapper.Mapper+fromTo) : <code>Object.&lt;string, string&gt;</code>
     * [.multiples](#module_aramaicMapper.Mapper+multiples) : <code>Array.&lt;string&gt;</code>
     * [.map(word, wordProps)](#module_aramaicMapper.Mapper+map) ⇒ <code>string</code>
+    * [.removeDotting(isDotting)](#module_aramaicMapper.Mapper+removeDotting) ⇒ <code>function</code>
 
 <a name="new_module_aramaicMapper.Mapper_new"></a>
 
@@ -155,7 +157,7 @@ Character mapping hash from base Writing to mapped Writing
 <a name="module_aramaicMapper.Mapper+multiples"></a>
 
 #### mapper.multiples : <code>Array.&lt;string&gt;</code>
-1 character to n characters mappings array property.
+Mapped multiple char sequences that map to a single `fromWriting` char.
 Used to move only 1 character ahead, instead of length of mapped string.
 
 **Kind**: instance property of [<code>Mapper</code>](#module_aramaicMapper.Mapper)  
@@ -171,6 +173,19 @@ Map word from a base writing system to another system
 | --- | --- | --- |
 | word | <code>string</code> | input word to be mapped |
 | wordProps | <code>Object</code> | optional word settings - to be passed to callback |
+
+<a name="module_aramaicMapper.Mapper+removeDotting"></a>
+
+#### mapper.removeDotting(isDotting) ⇒ <code>function</code>
+Returns a function to remove vowels and diacritics and keep the consonantal
+skeleton only.
+
+**Kind**: instance method of [<code>Mapper</code>](#module_aramaicMapper.Mapper)  
+**Returns**: <code>function</code> - word => word removeDotting function logic  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| isDotting | <code>function</code> | string => boolean to check if char is dotting |
 
 <a name="module_aramaicMapper.mapCallback"></a>
 

@@ -82,7 +82,7 @@ function Mapper(fromWriting, toWriting, mapCallback) {
   this.fromTo = Object.create(null);
 
   /**
-   * 1 character to n characters mappings array property.
+   * Mapped multiple char sequences that map to a single `fromWriting` char.
    * Used to move only 1 character ahead, instead of length of mapped string.
    * @alias module:aramaicMapper.Mapper#multiples
    * @type { Array.<string> }
@@ -169,5 +169,30 @@ function Mapper(fromWriting, toWriting, mapCallback) {
     return sb;
   };
 }
+
+/**
+ * Returns a function to remove vowels and diacritics and keep the consonantal
+ * skeleton only.
+ * @alias module:aramaicMapper.Mapper#removeDotting
+ * @param { Function } isDotting string => boolean to check if char is dotting
+ * @returns { Function } word => word removeDotting function logic
+*/
+Mapper.prototype.removeDotting = isDotting => word => {
+  if (!word) {
+    return word;
+  }
+
+  let hasDotting = false;
+  const stack = [];
+  for (let i = 0, len = word.length; i < len; i++) {
+    const c = word.charAt(i);
+    if (isDotting(c)) {
+      hasDotting = true;
+    } else {
+      stack.push(c);
+    }
+  }
+  return hasDotting ? stack.join('') : word;
+};
 
 export { Writing, Mapper };

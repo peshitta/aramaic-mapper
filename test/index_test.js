@@ -1,62 +1,65 @@
 const { strictEqual, notStrictEqual, ok } = require('assert');
 const { Writing, Mapper } = require('../build/aramaic-mapper');
 
-const fromSedraWriting = new Writing(
-  [
-    'A',
-    'B',
-    'G',
-    'D',
-    'H',
-    'O',
-    'Z',
-    'K',
-    'Y',
-    ';',
-    'C',
-    'L',
-    'M',
-    'N',
-    'S',
-    'E',
-    'I',
-    '/',
-    'X',
-    'R',
-    'W',
-    'T'
-  ],
-  ['a', 'o', 'e', 'i', 'u'],
-  ["'", ',', '_', '*']
-);
+const consonants = [
+  'A',
+  'B',
+  'G',
+  'D',
+  'H',
+  'O',
+  'Z',
+  'K',
+  'Y',
+  ';',
+  'C',
+  'L',
+  'M',
+  'N',
+  'S',
+  'E',
+  'I',
+  '/',
+  'X',
+  'R',
+  'W',
+  'T'
+];
+
+const calConsonants = [
+  ')',
+  'b',
+  'g',
+  'd',
+  'h',
+  'w',
+  'z',
+  'x',
+  'T',
+  'y',
+  'k',
+  'l',
+  'm',
+  'n',
+  's',
+  '(',
+  'p',
+  'c',
+  'q',
+  'r',
+  '$',
+  't'
+];
+const vowels = ['a', 'o', 'e', 'i', 'u'];
+const diacritics = ["'", ',', '_', '*'];
+const fromSedraWriting = new Writing(consonants, vowels, diacritics);
 const toCalWriting = new Writing(
-  [
-    ')',
-    'b',
-    'g',
-    'd',
-    'h',
-    'w',
-    'z',
-    'x',
-    'T',
-    'y',
-    'k',
-    'l',
-    'm',
-    'n',
-    's',
-    '(',
-    'p',
-    'c',
-    'q',
-    'r',
-    '$',
-    't'
-  ],
-  ['a', 'o', 'e', 'i', 'u', 'E', 'O'],
-  ["'", ',', '_', '*']
+  calConsonants,
+  vowels.concat(['E', 'O']),
+  diacritics
 );
+
+const isDotting = c => vowels.concat(diacritics).indexOf(c) > -1;
 
 describe('Sedra', () => {
   const mapper = new Mapper(fromSedraWriting, toCalWriting);
@@ -469,6 +472,34 @@ describe('Sedra', () => {
       const word = toCal(peculiarWord);
       const wordExpected = '';
       strictEqual(word, wordExpected, 'toCal_generic peculiar word object');
+    });
+  });
+});
+describe('Sedra', () => {
+  const fromWriting = new Writing(consonants, vowels);
+  const toWriting = new Writing(calConsonants, vowels.concat(['E', 'O']));
+  const mapper = new Mapper(fromWriting, toWriting);
+  const removeDotting = mapper.removeDotting(isDotting);
+  describe('removeDotting', () => {
+    it('Check consonantal and vocalised', () => {
+      const word = 'DXSR;A-DI;L;IOS';
+      const expected = removeDotting(word);
+      const vocalised = removeDotting("D'XeSaRi;aA-D,I,i;Li;I'oOS");
+      strictEqual(word, expected, 'removeDotting consonant only');
+      strictEqual(vocalised, expected, 'removeDotting vocalised');
+    });
+    it('Word with (wu) => (uO) mapping', () => {
+      const word = removeDotting('LBELDBB;CON');
+      const wordExpected = 'LBELDBB;CON';
+      const vocalised = removeDotting("LaB,EeLD'B,oB,a;C'uON");
+      const vocalisedExpected = wordExpected;
+      strictEqual(word, wordExpected, 'removeDotting_wu consonant');
+      strictEqual(vocalised, vocalisedExpected, 'removeDotting_wu vocalised');
+    });
+    it('Blank word returns blank', () => {
+      const word = removeDotting('');
+      const wordExpected = '';
+      strictEqual(word, wordExpected, 'removeDotting_blank');
     });
   });
 });
