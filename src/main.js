@@ -172,6 +172,7 @@ function Mapper(fromWriting, toWriting, mapCallback) {
 
 /**
  * Returns function which returns true if input word has vowels or diacritics.
+ * @static
  * @param { function } isDotting (char => boolean) which checks if char is dotting
  * @returns { function } hasDotting (word => boolean) function logic
  */
