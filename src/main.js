@@ -171,28 +171,46 @@ function Mapper(fromWriting, toWriting, mapCallback) {
 }
 
 /**
+ * Returns function which returns true if input word has vowels or diacritics.
+ * @param { function } isDotting (char => boolean) which checks if char is dotting
+ * @returns { function } hasDotting (word => boolean) function logic
+ */
+const hasDotting = isDotting => word => {
+  if (!word) {
+    return false;
+  }
+  for (let i = 0, len = word.length; i < len; i++) {
+    const c = word.charAt(i);
+    if (isDotting(c)) {
+      return true;
+    }
+  }
+  return false;
+};
+
+/**
  * Returns a function to remove vowels and diacritics and keep the consonantal
  * skeleton only.
  * @static
- * @param { Function } isDotting (string => boolean) to check if char is dotting
- * @returns { Function } (word => word) clearDotting function logic
+ * @param { function } isDotting (char => boolean) which checks if char is dotting
+ * @returns { function } clearDotting (word => word) function logic
 */
-export const clearDotting = isDotting => word => {
+const clearDotting = isDotting => word => {
   if (!word) {
     return word;
   }
 
-  let hasDotting = false;
+  let hasDots = false;
   const stack = [];
   for (let i = 0, len = word.length; i < len; i++) {
     const c = word.charAt(i);
     if (isDotting(c)) {
-      hasDotting = true;
+      hasDots = true;
     } else {
       stack.push(c);
     }
   }
-  return hasDotting ? stack.join('') : word;
+  return hasDots ? stack.join('') : word;
 };
 
-export { Writing, Mapper };
+export { Writing, Mapper, hasDotting, clearDotting };

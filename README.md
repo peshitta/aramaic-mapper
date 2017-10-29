@@ -25,7 +25,7 @@ Following bundles are available:
 libraries and applications
 
 The package could also be downloaded directly from:
-[https://registry.npmjs.org/aramaic-mapper/-/aramaic-mapper-1.1.2.tgz](https://registry.npmjs.org/aramaic-mapper/-/aramaic-mapper-1.1.2.tgz)
+[https://registry.npmjs.org/aramaic-mapper/-/aramaic-mapper-1.1.3.tgz](https://registry.npmjs.org/aramaic-mapper/-/aramaic-mapper-1.1.3.tgz)
 
 ## More information
 
@@ -61,17 +61,20 @@ npm run build
 ## API Reference
 
 * [aramaicMapper](#module_aramaicMapper)
-    * [.Writing](#module_aramaicMapper.Writing)
-        * [new Writing(consonants, vowels, diacritics, punctuation, other)](#new_module_aramaicMapper.Writing_new)
-    * [.Mapper](#module_aramaicMapper.Mapper)
-        * [new Mapper(fromWriting, toWriting, mapCallback)](#new_module_aramaicMapper.Mapper_new)
-        * [.fromWriting](#module_aramaicMapper.Mapper+fromWriting) : <code>Writing</code>
-        * [.toWriting](#module_aramaicMapper.Mapper+toWriting) : <code>Writing</code>
-        * [.fromTo](#module_aramaicMapper.Mapper+fromTo) : <code>Object.&lt;string, string&gt;</code>
-        * [.multiples](#module_aramaicMapper.Mapper+multiples) : <code>Array.&lt;string&gt;</code>
-        * [.map(word, wordProps)](#module_aramaicMapper.Mapper+map) ⇒ <code>string</code>
-    * [.clearDotting](#module_aramaicMapper.clearDotting) ⇒ <code>function</code>
-    * [.mapCallback](#module_aramaicMapper.mapCallback) ⇒ <code>string</code>
+    * _static_
+        * [.Writing](#module_aramaicMapper.Writing)
+            * [new Writing(consonants, vowels, diacritics, punctuation, other)](#new_module_aramaicMapper.Writing_new)
+        * [.Mapper](#module_aramaicMapper.Mapper)
+            * [new Mapper(fromWriting, toWriting, mapCallback)](#new_module_aramaicMapper.Mapper_new)
+            * [.fromWriting](#module_aramaicMapper.Mapper+fromWriting) : <code>Writing</code>
+            * [.toWriting](#module_aramaicMapper.Mapper+toWriting) : <code>Writing</code>
+            * [.fromTo](#module_aramaicMapper.Mapper+fromTo) : <code>Object.&lt;string, string&gt;</code>
+            * [.multiples](#module_aramaicMapper.Mapper+multiples) : <code>Array.&lt;string&gt;</code>
+            * [.map(word, wordProps)](#module_aramaicMapper.Mapper+map) ⇒ <code>string</code>
+        * [.clearDotting(isDotting)](#module_aramaicMapper.clearDotting) ⇒ <code>function</code>
+        * [.mapCallback](#module_aramaicMapper.mapCallback) ⇒ <code>string</code>
+    * _inner_
+        * [~hasDotting(isDotting)](#module_aramaicMapper..hasDotting) ⇒ <code>function</code>
 
 <a name="module_aramaicMapper.Writing"></a>
 
@@ -175,16 +178,16 @@ Map word from a base writing system to another system
 
 <a name="module_aramaicMapper.clearDotting"></a>
 
-### aramaicMapper.clearDotting ⇒ <code>function</code>
+### aramaicMapper.clearDotting(isDotting) ⇒ <code>function</code>
 Returns a function to remove vowels and diacritics and keep the consonantal
 skeleton only.
 
-**Kind**: static constant of [<code>aramaicMapper</code>](#module_aramaicMapper)  
-**Returns**: <code>function</code> - (word => word) clearDotting function logic  
+**Kind**: static method of [<code>aramaicMapper</code>](#module_aramaicMapper)  
+**Returns**: <code>function</code> - clearDotting (word => word) function logic  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| isDotting | <code>function</code> | (string => boolean) to check if char is dotting |
+| isDotting | <code>function</code> | (char => boolean) which checks if char is dotting |
 
 <a name="module_aramaicMapper.mapCallback"></a>
 
@@ -199,4 +202,16 @@ character
 | index | <code>number</code> | index of the current character to be mapped |
 | fromTo | <code>Object.&lt;string, string&gt;</code> | character mapping hash from |
 | wordProps | <code>Object</code> | optional word properties hash base Writing to mapped Writing |
+
+<a name="module_aramaicMapper..hasDotting"></a>
+
+### aramaicMapper~hasDotting(isDotting) ⇒ <code>function</code>
+Returns function which returns true if input word has vowels or diacritics.
+
+**Kind**: inner method of [<code>aramaicMapper</code>](#module_aramaicMapper)  
+**Returns**: <code>function</code> - hasDotting (word => boolean) function logic  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| isDotting | <code>function</code> | (char => boolean) which checks if char is dotting |
 

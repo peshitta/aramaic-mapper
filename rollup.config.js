@@ -8,7 +8,7 @@ const isDev = process.env.BUILD === 'dev';
 const banner = isProduction
   ? '/**\n' +
     '* @file Generic support for mapping between Aramaic writing systems\n' +
-    '* @version 1.1.2\n' +
+    '* @version 1.1.3\n' +
     '* @author Greg Borota\n' +
     '* @copyright (c) 2017 Greg Borota.\n' +
     '* @license MIT\n' +
