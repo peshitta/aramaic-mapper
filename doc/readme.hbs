@@ -7,7 +7,7 @@
 [![Dependency Status](https://david-dm.org/peshitta/aramaic-mapper.svg)](https://david-dm.org/peshitta/aramaic-mapper)
 [![devDependencies Status](https://david-dm.org/peshitta/aramaic-mapper/dev-status.svg)](https://david-dm.org/peshitta/aramaic-mapper?type=dev)
 [![Coverage Status](https://coveralls.io/repos/github/peshitta/aramaic-mapper/badge.svg?branch=master)](https://coveralls.io/github/peshitta/aramaic-mapper?branch=master)
-<a href="https://twitter.com/gborota?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @gborota</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+[![@peshittap](http://i.imgur.com/tXSoThF.png "@peshittap")](https://www.twitter.com/peshittap)
 
 Generic support for mapping between Aramaic writing systems
 
@@ -48,7 +48,10 @@ You are welcomed to improve this implementation or provide feedback. Please
 feel free to [Fork](https://help.github.com/articles/fork-a-repo/), create a
 [Pull Request](https://help.github.com/articles/about-pull-requests/) or
 submit [Issues](https://github.com/peshitta/aramaic-mapper/issues).
-Thank you!
+
+To read quick updates about the app or post questions or feedback, follow
+[@peshittap](https://www.twitter.com/peshittap)
+at[![@peshittap](http://i.imgur.com/wWzX9uB.png "@peshittap")](https://www.twitter.com/peshittap).
 
 ## Development
 
