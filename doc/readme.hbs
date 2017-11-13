@@ -7,6 +7,7 @@
 [![Dependency Status](https://david-dm.org/peshitta/aramaic-mapper.svg)](https://david-dm.org/peshitta/aramaic-mapper)
 [![devDependencies Status](https://david-dm.org/peshitta/aramaic-mapper/dev-status.svg)](https://david-dm.org/peshitta/aramaic-mapper?type=dev)
 [![Coverage Status](https://coveralls.io/repos/github/peshitta/aramaic-mapper/badge.svg?branch=master)](https://coveralls.io/github/peshitta/aramaic-mapper?branch=master)
+<a href="https://twitter.com/gborota?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @gborota</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 Generic support for mapping between Aramaic writing systems
 
