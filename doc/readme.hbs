@@ -48,7 +48,7 @@ feel free to [Fork](https://help.github.com/articles/fork-a-repo/), create a
 [Pull Request](https://help.github.com/articles/about-pull-requests/) or
 submit [Issues](https://github.com/peshitta/aramaic-mapper/issues).
 
-To read quick updates about the app or post questions or feedback, follow
+To read quick updates about Peshitta app or post questions or feedback, follow
 [@peshittap](https://www.twitter.com/peshittap)
 at [![@peshittap](http://i.imgur.com/wWzX9uB.png "@peshittap")](https://www.twitter.com/peshittap)or
 [![Gitter](https://badges.gitter.im/peshitta/peshitta.svg "Join the chat at https://gitter.im/peshitta/Lobby")](https://gitter.im/peshitta/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
