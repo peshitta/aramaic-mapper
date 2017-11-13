@@ -5,7 +5,6 @@
 [![Build Status](https://travis-ci.org/peshitta/aramaic-mapper.svg?branch=master)](https://travis-ci.org/peshitta/aramaic-mapper)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/peshitta/aramaic-mapper/blob/master/LICENSE)
 [![Dependency Status](https://david-dm.org/peshitta/aramaic-mapper.svg)](https://david-dm.org/peshitta/aramaic-mapper)
-[![devDependencies Status](https://david-dm.org/peshitta/aramaic-mapper/dev-status.svg)](https://david-dm.org/peshitta/aramaic-mapper?type=dev)
 [![Coverage Status](https://coveralls.io/repos/github/peshitta/aramaic-mapper/badge.svg?branch=master)](https://coveralls.io/github/peshitta/aramaic-mapper?branch=master)
 [![Gitter](https://badges.gitter.im/peshitta/peshitta.svg "Join the chat at https://gitter.im/peshitta/Lobby")](https://gitter.im/peshitta/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
@@ -51,8 +50,8 @@ submit [Issues](https://github.com/peshitta/aramaic-mapper/issues).
 
 To read quick updates about the app or post questions or feedback, follow
 [@peshittap](https://www.twitter.com/peshittap)
-at [![@peshittap](http://i.imgur.com/wWzX9uB.png "@peshittap")](https://www.twitter.com/peshittap)
-or [![Gitter](https://badges.gitter.im/peshitta/peshitta.svg "Join the chat at https://gitter.im/peshitta/Lobby")](https://gitter.im/peshitta/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+at [![@peshittap](http://i.imgur.com/wWzX9uB.png "@peshittap")](https://www.twitter.com/peshittap)or
+[![Gitter](https://badges.gitter.im/peshitta/peshitta.svg "Join the chat at https://gitter.im/peshitta/Lobby")](https://gitter.im/peshitta/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 ## Development
 
