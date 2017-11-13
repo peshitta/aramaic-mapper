@@ -72,6 +72,7 @@ npm run build
         * [.map(word, wordProps)](#module_aramaicMapper.Mapper+map) ⇒ <code>string</code>
     * [.hasDotting(isDotting)](#module_aramaicMapper.hasDotting) ⇒ <code>function</code>
     * [.clearDotting(isDotting)](#module_aramaicMapper.clearDotting) ⇒ <code>function</code>
+    * [.getSort(letterAsciiMap, removeDotting)](#module_aramaicMapper.getSort) ⇒ <code>function</code>
     * [.mapCallback](#module_aramaicMapper.mapCallback) ⇒ <code>string</code>
 
 <a name="module_aramaicMapper.Writing"></a>
@@ -198,6 +199,19 @@ skeleton only.
 | Param | Type | Description |
 | --- | --- | --- |
 | isDotting | <code>function</code> | (char => boolean) which checks if char is dotting |
+
+<a name="module_aramaicMapper.getSort"></a>
+
+### aramaicMapper.getSort(letterAsciiMap, removeDotting) ⇒ <code>function</code>
+Returns a function to be used for sorting words using the provided `letterAsciiMap`
+
+**Kind**: static method of [<code>aramaicMapper</code>](#module_aramaicMapper)  
+**Returns**: <code>function</code> - ((word1, word2) => number) function implementation  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| letterAsciiMap | <code>Object.&lt;string, string&gt;</code> | letter to ASCII value map |
+| removeDotting | <code>function</code> | (word => word) remove dots function |
 
 <a name="module_aramaicMapper.mapCallback"></a>
 

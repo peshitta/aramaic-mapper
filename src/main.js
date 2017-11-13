@@ -214,4 +214,53 @@ const clearDotting = isDotting => word => {
   return hasDots ? stack.join('') : word;
 };
 
-export { Writing, Mapper, hasDotting, clearDotting };
+/**
+ * Convert word to ASCII sort chars
+ * @private
+ * @static
+ * @param { string } word input word
+ * @param { Object.<string, string> } letterAsciiMap letter to ASCII value map
+ * @returns { string } word converted as ASCII sort
+ */
+const toAsciiSort = (word, letterAsciiMap) => {
+  let sb = '';
+  for (let i = 0, len = word.length; i < len; i++) {
+    const c = word.charAt(i);
+    const m = letterAsciiMap[c];
+    sb += m || (m === '' ? '' : c);
+  }
+  return sb;
+};
+
+/**
+ * Returns a function to be used for sorting words using the provided `letterAsciiMap`
+ * @static
+ * @param { Object.<string, string> } letterAsciiMap letter to ASCII value map
+ * @param { function } removeDotting (word => word) remove dots function
+ * @returns { function } ((word1, word2) => number) function implementation
+ */
+const getSort = (letterAsciiMap, removeDotting) => (word1, word2) => {
+  if (!word1 || !word2) {
+    return !word1 && !word2 ? 0 : !word1 ? -1 : 1;
+  }
+
+  const cons1 = removeDotting(word1);
+  const cons2 = removeDotting(word2);
+  let asc1 = toAsciiSort(cons1, letterAsciiMap);
+  let asc2 = toAsciiSort(cons2, letterAsciiMap);
+  if (asc1 < asc2) {
+    return -1;
+  }
+  if (asc1 > asc2) {
+    return 1;
+  }
+
+  if (cons1 === word1 && cons2 === word2) {
+    return 0; // no dots
+  }
+  asc1 = toAsciiSort(word1, letterAsciiMap);
+  asc2 = toAsciiSort(word2, letterAsciiMap);
+  return asc1 < asc2 ? -1 : asc1 > asc2 ? 1 : 0;
+};
+
+export { Writing, Mapper, hasDotting, clearDotting, getSort };

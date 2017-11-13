@@ -3,7 +3,8 @@ const {
   Writing,
   Mapper,
   clearDotting,
-  hasDotting
+  hasDotting,
+  getSort
 } = require('../build/aramaic-mapper');
 
 const consonants = [
@@ -62,6 +63,55 @@ const toCalWriting = new Writing(
   calConsonants,
   vowels.concat(['E', 'O']),
   diacritics
+);
+
+/**
+ * Letter ordinal value. Used for sorting:
+ * a b c d e f g h i j k l m n o p q r s t u v - A O E I U
+ * @constant
+ * @type { Object.<string, string> }
+*/
+const letterAsciiMap = Object.freeze(
+  Object.create(null, {
+    A: { value: 'a', enumerable: true },
+    B: { value: 'b', enumerable: true },
+    G: { value: 'c', enumerable: true },
+    D: { value: 'd', enumerable: true },
+
+    H: { value: 'e', enumerable: true },
+    O: { value: 'f', enumerable: true },
+    Z: { value: 'g', enumerable: true },
+
+    K: { value: 'h', enumerable: true },
+    Y: { value: 'i', enumerable: true },
+    ';': { value: 'j', enumerable: true },
+
+    C: { value: 'k', enumerable: true },
+    L: { value: 'l', enumerable: true },
+    M: { value: 'm', enumerable: true },
+    N: { value: 'n', enumerable: true },
+
+    S: { value: 'o', enumerable: true },
+    E: { value: 'p', enumerable: true },
+    I: { value: 'q', enumerable: true },
+    '/': { value: 'r', enumerable: true },
+
+    X: { value: 's', enumerable: true },
+    R: { value: 't', enumerable: true },
+    W: { value: 'u', enumerable: true },
+    T: { value: 'v', enumerable: true },
+
+    a: { value: 'w', enumerable: true },
+    o: { value: 'x', enumerable: true },
+    e: { value: 'y', enumerable: true },
+    i: { value: 'z', enumerable: true },
+    u: { value: '{', enumerable: true },
+
+    "'": { value: '', enumerable: true },
+    ',': { value: ',', enumerable: true },
+    _: { value: '', enumerable: true },
+    '*': { value: '', enumerable: true }
+  })
 );
 
 const isDotting = c => vowels.concat(diacritics).indexOf(c) > -1;
@@ -547,6 +597,61 @@ describe('Sedra', () => {
       const word = removeDotting('');
       const wordExpected = '';
       strictEqual(word, wordExpected, 'clearDotting_blank');
+    });
+  });
+});
+
+describe('Sedra', () => {
+  const removeDotting = clearDotting(isDotting);
+  const sort = getSort(letterAsciiMap, removeDotting);
+
+  describe('getSort', () => {
+    it('(null, word)', () => {
+      const nullWord = null;
+      const word = 'DXSR;A-DI;L;IOS';
+      const expected = sort(nullWord, word);
+      strictEqual(-1, expected, 'getSort (null, word)');
+    });
+    it('(word, null)', () => {
+      const word = 'DXSR;A-DI;L;IOS';
+      const nullWord = null;
+      const expected = sort(word, nullWord);
+      strictEqual(1, expected, 'getSort (word, null)');
+    });
+    it('(null, null)', () => {
+      const word = null;
+      const nullWord = null;
+      const expected = sort(word, nullWord);
+      strictEqual(0, expected, 'getSort (null, null)');
+    });
+    it('(word, wordVocalized)', () => {
+      const word = 'DXSR;A-DI;L;IOS';
+      const vocalised = "D'XeSaRi;aA-D,I,i;Li;I'oOS";
+      const expected = sort(word, vocalised);
+      strictEqual(-1, expected, 'getSort vocalised');
+    });
+    it('Consonant only great sort', () => {
+      const word1 = 'LBELDBB;CON';
+      const word2 = 'DXSR;A-DI;L;IOS';
+      const expected = sort(word1, word2);
+      strictEqual(1, expected, 'getSort');
+    });
+    it('Consonant only less sort', () => {
+      const word1 = 'DXSR;A-DI;L;IOS';
+      const word2 = 'LBELDBB;CON';
+      const expected = sort(word1, word2);
+      strictEqual(-1, expected, 'getSort');
+    });
+    it('Consonant only equal sort', () => {
+      const word1 = 'DXSR;A-DI;L;IOS';
+      const word2 = 'DXSR;A-DI;L;IOS';
+      const expected = sort(word1, word2);
+      strictEqual(0, expected, 'getSort');
+    });
+    it('Blank word returns blank', () => {
+      const word = sort('');
+      const wordExpected = '';
+      strictEqual(word, sort(0, wordExpected), 'getSort_blank');
     });
   });
 });
