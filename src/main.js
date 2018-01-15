@@ -20,7 +20,7 @@
  * @param { string[] } diacritics optional diacritics list in the Sedra order
  * @param { string[]|undefined } punctuation optional punctuation list
  * @param { string[]|undefined } other optional other symbols like crosses, etc.
-  */
+ */
 function Writing(consonants, vowels, diacritics, punctuation, other) {
   this.consonants = consonants;
   this.vowels = vowels;
@@ -195,7 +195,7 @@ const hasDotting = isDotting => word => {
  * @static
  * @param { function } isDotting (char => boolean) which checks if char is dotting
  * @returns { function } clearDotting (word => word) function logic
-*/
+ */
 const clearDotting = isDotting => word => {
   if (!word) {
     return word;
@@ -215,52 +215,54 @@ const clearDotting = isDotting => word => {
 };
 
 /**
- * Convert word to ASCII sort chars
+ * Convert word to consonantal and vocalised ASCII sort chars.
  * @private
  * @static
  * @param { string } word input word
  * @param { Object.<string, string> } letterAsciiMap letter to ASCII value map
- * @returns { string } word converted as ASCII sort
+ * @param { function } isConsonant function returning true if char is consonant
+ * @returns { object } word converted as consonantal and vocalised ASCII sort
  */
-const toAsciiSort = (word, letterAsciiMap) => {
-  let sb = '';
+const toAsciiSort = (word, letterAsciiMap, isConsonant) => {
+  let con = '';
+  let voc = '';
   for (let i = 0, len = word.length; i < len; i++) {
     const c = word.charAt(i);
     const m = letterAsciiMap[c];
-    sb += m || (m === '' ? '' : c);
+    if (isConsonant(c)) {
+      con += m || (m === '' ? '' : c);
+    }
+    voc += m || (m === '' ? '' : c);
   }
-  return sb;
+  return { con, voc };
 };
 
 /**
  * Returns a function to be used for sorting words using the provided `letterAsciiMap`
  * @static
  * @param { Object.<string, string> } letterAsciiMap letter to ASCII value map
- * @param { function } removeDotting (word => word) remove dots function
+ * @param { function } isConsonant (char => boolean) Is character c a consonant
  * @returns { function } ((word1, word2) => number) function implementation
  */
-const getSort = (letterAsciiMap, removeDotting) => (word1, word2) => {
+const getSort = (letterAsciiMap, isConsonant) => (word1, word2) => {
   if (!word1 || !word2) {
     return !word1 && !word2 ? 0 : !word1 ? -1 : 1;
   }
 
-  const cons1 = removeDotting(word1);
-  const cons2 = removeDotting(word2);
-  let asc1 = toAsciiSort(cons1, letterAsciiMap);
-  let asc2 = toAsciiSort(cons2, letterAsciiMap);
-  if (asc1 < asc2) {
+  const { con: c1, voc: v1 } = toAsciiSort(word1, letterAsciiMap, isConsonant);
+  const { con: c2, voc: v2 } = toAsciiSort(word2, letterAsciiMap, isConsonant);
+  if (c1 < c2) {
     return -1;
   }
-  if (asc1 > asc2) {
+  if (c1 > c2) {
     return 1;
   }
 
-  if (cons1 === word1 && cons2 === word2) {
+  if (c1 === v1 && c2 === v2) {
     return 0; // no dots
   }
-  asc1 = toAsciiSort(word1, letterAsciiMap);
-  asc2 = toAsciiSort(word2, letterAsciiMap);
-  return asc1 < asc2 ? -1 : asc1 > asc2 ? 1 : 0;
+
+  return v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
 };
 
 export { Writing, Mapper, hasDotting, clearDotting, getSort };

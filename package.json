@@ -1,6 +1,6 @@
 {
   "name": "aramaic-mapper",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "Generic support for mapping between Aramaic writing systems",
   "main": "build/aramaic-mapper.js",
   "mainMin": "build/aramaic-mapper.min.js",
@@ -29,9 +29,7 @@
       "arrow-parens": 0
     }
   },
-  "files": [
-    "build/*.js"
-  ],
+  "files": ["build/*.js"],
   "engines": {
     "node": ">=6.0.0"
   },
@@ -62,15 +60,15 @@
   "dependencies": {},
   "devDependencies": {
     "coveralls": "^3.0.0",
-    "eslint": "^4.11.0",
+    "eslint": "^4.15.0",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.8.0",
     "istanbul": "^0.4.5",
-    "jsdoc-to-markdown": "^3.0.1",
-    "mocha": "^4.0.1",
-    "rollup": "^0.51.5",
-    "rollup-plugin-buble": "^0.17.0",
-    "rollup-plugin-istanbul": "^1.1.0",
+    "jsdoc-to-markdown": "^3.0.4",
+    "mocha": "^4.1.0",
+    "rollup": "^0.54.0",
+    "rollup-plugin-buble": "^0.18.0",
+    "rollup-plugin-istanbul": "^2.0.0",
     "rollup-plugin-uglify": "^2.0.1"
   }
 }

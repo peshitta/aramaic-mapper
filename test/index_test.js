@@ -64,6 +64,7 @@ const toCalWriting = new Writing(
   vowels.concat(['E', 'O']),
   diacritics
 );
+const isConsonant = ch => fromSedraWriting.consonants.includes(ch);
 
 /**
  * Letter ordinal value. Used for sorting:
@@ -324,7 +325,6 @@ describe('Sedra', () => {
 
 describe('Sedra', () => {
   const mapCallback = (word, i, calMap) => {
-    const isConsonant = ch => fromSedraWriting.consonants.includes(ch);
     const map = ch => calMap[ch] || ch;
     const c = word.charAt(i);
 
@@ -602,8 +602,7 @@ describe('Sedra', () => {
 });
 
 describe('Sedra', () => {
-  const removeDotting = clearDotting(isDotting);
-  const sort = getSort(letterAsciiMap, removeDotting);
+  const sort = getSort(letterAsciiMap, isConsonant);
 
   describe('getSort', () => {
     it('(null, word)', () => {

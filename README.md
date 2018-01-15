@@ -25,7 +25,7 @@ Following bundles are available:
 libraries and applications
 
 The package could also be downloaded directly from:
-[https://registry.npmjs.org/aramaic-mapper/-/aramaic-mapper-1.1.4.tgz](https://registry.npmjs.org/aramaic-mapper/-/aramaic-mapper-1.1.4.tgz)
+[https://registry.npmjs.org/aramaic-mapper/-/aramaic-mapper-1.1.5.tgz](https://registry.npmjs.org/aramaic-mapper/-/aramaic-mapper-1.1.5.tgz)
 
 ## More information
 
@@ -76,7 +76,7 @@ npm run build
         * [.map(word, wordProps)](#module_aramaicMapper.Mapper+map) ⇒ <code>string</code>
     * [.hasDotting(isDotting)](#module_aramaicMapper.hasDotting) ⇒ <code>function</code>
     * [.clearDotting(isDotting)](#module_aramaicMapper.clearDotting) ⇒ <code>function</code>
-    * [.getSort(letterAsciiMap, removeDotting)](#module_aramaicMapper.getSort) ⇒ <code>function</code>
+    * [.getSort(letterAsciiMap, isConsonant)](#module_aramaicMapper.getSort) ⇒ <code>function</code>
     * [.mapCallback](#module_aramaicMapper.mapCallback) ⇒ <code>string</code>
 
 <a name="module_aramaicMapper.Writing"></a>
@@ -206,7 +206,7 @@ skeleton only.
 
 <a name="module_aramaicMapper.getSort"></a>
 
-### aramaicMapper.getSort(letterAsciiMap, removeDotting) ⇒ <code>function</code>
+### aramaicMapper.getSort(letterAsciiMap, isConsonant) ⇒ <code>function</code>
 Returns a function to be used for sorting words using the provided `letterAsciiMap`
 
 **Kind**: static method of [<code>aramaicMapper</code>](#module_aramaicMapper)  
@@ -215,7 +215,7 @@ Returns a function to be used for sorting words using the provided `letterAsciiM
 | Param | Type | Description |
 | --- | --- | --- |
 | letterAsciiMap | <code>Object.&lt;string, string&gt;</code> | letter to ASCII value map |
-| removeDotting | <code>function</code> | (word => word) remove dots function |
+| isConsonant | <code>function</code> | (char => boolean) Is character c a consonant |
 
 <a name="module_aramaicMapper.mapCallback"></a>
 
